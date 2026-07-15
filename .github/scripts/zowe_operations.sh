@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Disable OS keychain/credential store — not available on CI runners
+export ZOWE_CLI_PLUGINS_DIR=""
+export ZOWE_SECURE_CREDENTIALS_ENABLED=false
+
 # Convert username to lowercase
-LOWERCASE_USERNAME=$(echo "$ZOWE_USERNAME"| tr '[:upper:]' '[:lower:]')
+LOWERCASE_USERNAME=$(echo "$ZOWE_USERNAME" | tr '[:upper:]' '[:lower:]')
 
 # ZOWE CLI Profile init
 zowe config init --global-config --no-prompt
@@ -12,11 +16,13 @@ zowe config set profiles.zosmf.properties.host "$ZOWE_HOST" --global-config
 zowe config set profiles.zosmf.properties.port "$ZOWE_PORT" --global-config
 
 # ZOWE CLI Profile setting (Global Base)
+# Credentials are stored as plain text in the ephemeral runner config.
+# They originate from GitHub Secrets and are never persisted beyond the job.
 zowe config set profiles.global_base.type                           "base"           --global-config
 zowe config set profiles.global_base.properties.host                "$ZOWE_HOST"     --global-config
 zowe config set profiles.global_base.properties.rejectUnauthorized  "false"          --global-config
-zowe config set profiles.global_base.properties.user                "$ZOWE_USERNAME" --global-config --secure
-zowe config set profiles.global_base.properties.password            "$ZOWE_PASSWORD" --global-config --secure
+zowe config set profiles.global_base.properties.user                "$ZOWE_USERNAME" --global-config
+zowe config set profiles.global_base.properties.password            "$ZOWE_PASSWORD" --global-config
 
 # ZOWE CLI Profile setting (Bind to Defaults)
 zowe config set defaults.zosmf  "zosmf"       --global-config
