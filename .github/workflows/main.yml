@@ -22,8 +22,8 @@ jobs:
         .github/scripts/zowe_installation.sh
     - name: Run COBOL Check
       env:
-        ZOWE_HOST: ${{ environments.ZOWE_HOST }}
-        ZOWE_PORT: ${{ environments.ZOWE_PORT }}
+        ZOWE_HOST: ${{ environment.ZOWE_HOST }}
+        ZOWE_PORT: ${{ environment.ZOWE_PORT }}
         ZOWE_USERNAME: ${{ secrets.ZOWE_USERNAME }}
         ZOWE_PASSWORD: ${{ secrets.ZOWE_PASSWORD }}
       run: |
