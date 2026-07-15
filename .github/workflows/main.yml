@@ -15,6 +15,11 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
+    - name: Install ZOWE CLI
+      run: |
+        echo "Installing ZOWE CLI"
+        chmod +x .github/scripts/zowe_installation.sh
+        .github/scripts/zowe_installation.sh
     - name: Run COBOL Check
       env:
         ZOWE_USERNAME: ${{ secrets.ZOWE_USERNAME }}
