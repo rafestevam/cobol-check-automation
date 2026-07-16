@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 java -jar /z/bin/cobol-check.jar -p $1 -c /z/public/cobol-check.config.properties
