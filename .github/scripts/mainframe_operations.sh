@@ -54,7 +54,7 @@ run_cobolcheck() {
 
 # Run each program
 for program in NUMBERS EMPPAY DEPTPAY; do
-    run_cobolcheck $program
+    zowe uss issue ssh "$(declare -f run_cobolcheck); run_cobolcheck $program"
 done
 
 echo "Mainframe operations completed"
