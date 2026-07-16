@@ -56,6 +56,7 @@ run_cobolcheck() {
 for program in NUMBERS EMPPAY DEPTPAY; do
     zowe uss issue ssh "cd /z/z83784/cobolcheck && 
                         export ZOWE_USERNAME=${ZOWE_USERNAME} &&
+                        chmod +x ./cobolcheck.sh
                         $(declare -f run_cobolcheck); run_cobolcheck $program"
 done
 
