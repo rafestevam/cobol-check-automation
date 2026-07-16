@@ -1,2 +1,2 @@
 #!/bin/bash
-zowe uss issue ssh "java -jar /z/bin/cobol-check.jar -p $1 -c /z/z83784/cobol-check.config.properties"
+zowe uss issue ssh "cd /z/z83784/cobolcheck && java -jar /z/bin/cobol-check.jar -p $1 -c /z/public/cobol-check.config.properties"
